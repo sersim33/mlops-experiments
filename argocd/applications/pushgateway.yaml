@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: pushgateway
-  namespace: infra-tools
+  namespace: infra-tools  # namespace ArgoCD Application
 spec:
   project: default
   source:
@@ -11,13 +11,13 @@ spec:
     targetRevision: 2.7.0
     helm:
       releaseName: pushgateway
-      values:
+      valuesObject:
         service:
           type: ClusterIP
           port: 9091
   destination:
     server: https://kubernetes.default.svc
-    namespace: monitoring
+    namespace: monitoring  # namespace для PushGateway
   syncPolicy:
     automated:
       prune: true
@@ -26,5 +26,6 @@ spec:
       - CreateNamespace=true
       - ServerSideApply=true
       - SkipDryRunOnMissingResource=true
+
 
 

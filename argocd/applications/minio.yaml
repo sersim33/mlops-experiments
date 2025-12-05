@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: minio
-  namespace: infra-tools
+  namespace: infra-tools  # namespace ArgoCD Application
 spec:
   project: default
   source:
@@ -10,21 +10,18 @@ spec:
     chart: minio
     targetRevision: 13.7.2
     helm:
-      values:
+      valuesObject:
         auth:
           rootUser: minio
           rootPassword: minio123
-        defaultBuckets:
-          - name: mlflow-artifacts
-            policy: none
-            purge: false
+        defaultBuckets: "mlflow-artifacts"
         service:
           type: ClusterIP
         persistence:
           enabled: false
   destination:
     server: https://kubernetes.default.svc
-    namespace: infra-tools
+    namespace: mlflow  # namespace для сервісу MinIO
   syncPolicy:
     automated:
       prune: true
@@ -33,5 +30,6 @@ spec:
       - CreateNamespace=true
       - ServerSideApply=true
       - SkipDryRunOnMissingResource=true
+
 
 
