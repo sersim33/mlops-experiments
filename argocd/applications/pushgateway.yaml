@@ -5,22 +5,19 @@ metadata:
   namespace: infra-tools
 spec:
   project: default
-
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
     chart: prometheus-pushgateway
     targetRevision: 2.7.0
     helm:
       releaseName: pushgateway
-      valuesObject:
+      values:
         service:
           type: ClusterIP
           port: 9091
-
   destination:
-    namespace: monitoring
     server: https://kubernetes.default.svc
-
+    namespace: monitoring
   syncPolicy:
     automated:
       prune: true
@@ -29,4 +26,5 @@ spec:
       - CreateNamespace=true
       - ServerSideApply=true
       - SkipDryRunOnMissingResource=true
+
 

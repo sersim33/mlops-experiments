@@ -14,7 +14,10 @@ spec:
         auth:
           rootUser: minio
           rootPassword: minio123
-        defaultBuckets: "mlflow-artifacts"
+        defaultBuckets:
+          - name: mlflow-artifacts
+            policy: none
+            purge: false
         service:
           type: ClusterIP
         persistence:
@@ -30,4 +33,5 @@ spec:
       - CreateNamespace=true
       - ServerSideApply=true
       - SkipDryRunOnMissingResource=true
+
 
