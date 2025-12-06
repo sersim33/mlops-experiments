@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: pushgateway
-  namespace: infra-tools  # namespace ArgoCD Application
+  namespace: argocd  # namespace ArgoCD Application
 spec:
   project: default
   source:
