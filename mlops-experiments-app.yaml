@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mlops-experiments
+  namespace: infra-tools      # або namespace, де в тебе запущений Argo CD
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/sersim33/mlops-experiments.git   # твоя репа
+    targetRevision: main
+    path: argocd/applications   # шлях до манифестів у репі
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default         # або інший namespace, якщо потрібно
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
