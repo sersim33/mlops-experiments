@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://charts.bitnami.com/bitnami
     chart: minio
-    targetRevision: 13.7.2
+    targetRevision: 17.0.23
     helm:
       valuesObject:
         auth:
